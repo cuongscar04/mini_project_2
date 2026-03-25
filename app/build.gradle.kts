@@ -8,6 +8,13 @@ android {
         version = release(36)
     }
 
+    dependencies {
+        val room_version = "2.6.1"
+        implementation("androidx.room:room-runtime:$room_version")
+        annotationProcessor("androidx.room:room-compiler:$room_version")
+        // Nếu dùng thêm các thư viện khác thì thêm ở đây
+    }
+
     defaultConfig {
         applicationId = "com.example.miniproject2"
         minSdk = 24
