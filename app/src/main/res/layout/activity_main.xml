@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+<<<<<<< HEAD
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,17 +26,31 @@
             android:layout_height="wrap_content"
             android:text="Giỏ hàng" />
     </LinearLayout>
+=======
+>>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="Danh sách Sản Phẩm"
         android:textSize="20sp"
+=======
+        android:text="Danh mục sản phẩm"
+        android:textSize="24sp"
+>>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+<<<<<<< HEAD
         android:id="@+id/rvProducts"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+=======
+        android:id="@+id/rvCategories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+>>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
 </LinearLayout>
