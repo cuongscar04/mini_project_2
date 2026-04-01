@@ -41,15 +41,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-<<<<<<< HEAD
 
     // Room Database
-    // Room Database
-    val room_version = "2.5.2"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-=======
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler) // Dùng annotationProcessor vì bạn code Java
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
 }

@@ -7,16 +7,16 @@
     android:gravity="center">
 
     <TextView
-        android:id="@+id/tvProductName"
+        android:id="@+id/tvCartInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/btnPickItem"
+        android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nhặt hàng (Chọn sản phẩm)" />
+        android:text="Thanh toán" />
 
 </LinearLayout>

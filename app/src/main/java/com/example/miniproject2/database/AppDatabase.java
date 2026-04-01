@@ -1,7 +1,6 @@
 package com.example.miniproject2.database;
 
 import android.content.Context;
-<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -9,73 +8,59 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.Executors;
 
-import com.example.miniproject2.database.entity.*;
-import com.example.miniproject2.database.dao.*;
-
-@Database(entities = {User.class, Category.class, Product.class, Order.class, OrderDetail.class}, version = 1)
-public abstract class AppDatabase extends RoomDatabase {
-    private static AppDatabase instance;
-
-    public abstract UserDao userDao();
-    public abstract ShoppingDao shoppingDao();
-=======
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import com.example.miniproject2.dao.CategoryDao;
-import com.example.miniproject2.model.Category;
-
-@Database(entities = {Category.class}, version = 1)
+@Database(entities = {
+        Entities.User.class, Entities.Category.class, Entities.Product.class,
+        Entities.Order.class, Entities.OrderDetail.class
+}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static AppDatabase instance;
+    public abstract Daos.UserDao userDao();
+    public abstract Daos.CategoryDao categoryDao();
+    public abstract Daos.ProductDao productDao();
+    public abstract Daos.OrderDao orderDao();
+    public abstract Daos.OrderDetailDao orderDetailDao();
 
-    public abstract CategoryDao categoryDao();
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
+    private static volatile AppDatabase INSTANCE;
 
-    public static synchronized AppDatabase getInstance(Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "shopping_database")
-                    .fallbackToDestructiveMigration()
-<<<<<<< HEAD
-                    .addCallback(roomCallback)
-                    .allowMainThreadQueries()
-=======
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
-                    .build();
+    public static AppDatabase getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDatabase.class, "shopping_database")
+                            .allowMainThreadQueries() // Phục vụ mục đích trình diễn logic luồng rõ ràng
+                            .addCallback(roomCallback)
+                            .build();
+                }
+            }
         }
-        return instance;
+        return INSTANCE;
     }
-<<<<<<< HEAD
 
+    // Callback thêm dữ liệu mẫu khi khởi tạo DB lần đầu
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Executors.newSingleThreadExecutor().execute(() -> {
-                // User mẫu
-                User user = new User();
-                user.username = "admin";
-                user.password = "123";
-                instance.userDao().insert(user);
+                AppDatabase database = INSTANCE;
 
-                // Sản phẩm mẫu
-                Product p1 = new Product();
-                p1.name = "iPhone 15 Pro Max";
-                p1.price = 1000.0;
-                p1.description = "Điện thoại Apple cao cấp nhất";
+                // Hardcode Users
+                database.userDao().insert(new Entities.User("admin", "123456"));
 
-                Product p2 = new Product();
-                p2.name = "Samsung Galaxy S24 Ultra";
-                p2.price = 1200.0;
-                p2.description = "Điện thoại Samsung AI";
+                // Hardcode Categories
+                database.categoryDao().insertAll(
+                        new Entities.Category("Điện thoại"),
+                        new Entities.Category("Laptop")
+                );
 
-                instance.shoppingDao().insertProduct(p1);
-                instance.shoppingDao().insertProduct(p2);
+                // Hardcode Products
+                database.productDao().insertAll(
+                        new Entities.Product(1, "iPhone 15", 999.0, "Apple Smartphone"),
+                        new Entities.Product(1, "Samsung S24", 899.0, "Samsung Smartphone"),
+                        new Entities.Product(2, "MacBook Pro", 1999.0, "Apple Laptop")
+                );
             });
         }
     };
-=======
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
 }

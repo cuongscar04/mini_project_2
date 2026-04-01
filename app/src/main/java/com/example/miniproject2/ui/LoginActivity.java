@@ -1,50 +1,46 @@
 package com.example.miniproject2.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.miniproject2.R;
 import com.example.miniproject2.database.AppDatabase;
-import com.example.miniproject2.database.entity.User;
-import com.example.miniproject2.utils.SharedPrefManager;
+import com.example.miniproject2.database.Entities;
+import com.example.miniproject2.utils.SharedPrefsHelper;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private EditText edtUsername, edtPassword;
-    private AppDatabase db;
-    private SharedPrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        db = AppDatabase.getInstance(this);
-        prefManager = new SharedPrefManager(this);
+        AppDatabase db = AppDatabase.getInstance(this);
+        SharedPrefsHelper sharedPrefs = new SharedPrefsHelper(this);
 
-        edtUsername = findViewById(R.id.edtUsername);
-        edtPassword = findViewById(R.id.edtPassword);
+        EditText etUser = findViewById(R.id.etUsername);
+        EditText etPass = findViewById(R.id.etPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
 
-        btnLogin.setOnClickListener(v -> handleLogin());
-    }
+        btnLogin.setOnClickListener(v -> {
+            String user = etUser.getText().toString();
+            String pass = etPass.getText().toString();
 
-    private void handleLogin() {
-        String username = edtUsername.getText().toString().trim();
-        String password = edtPassword.getText().toString().trim();
+            Entities.User loggedInUser = db.userDao().login(user, pass);
+            if (loggedInUser != null) {
+                // Lưu trạng thái đăng nhập
+                sharedPrefs.saveLoginState(loggedInUser.id);
+                Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-        User user = db.userDao().login(username, password);
-
-        if (user != null) {
-            // Đăng nhập thành công, lưu phiên làm việc
-            prefManager.createLoginSession(user.id);
-            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-            finish(); // Đóng Activity đăng nhập, quay về màn hình trước đó
-        } else {
-            Toast.makeText(this, "Sai tài khoản hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
-        }
+                // Trả về RESULT_OK để Activity gọi nó (ProductDetail) tiếp tục luồng mua hàng
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                Toast.makeText(this, "Sai tài khoản hoặc mật khẩu (Thử admin/123456)", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

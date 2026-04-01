@@ -3,54 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-<<<<<<< HEAD
+    android:gravity="center"
+    android:padding="20dp">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btnNavLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginBottom="16dp">
+        android:text="Đăng nhập" />
 
-        <Button
-            android:id="@+id/btnAuth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đăng nhập"
-            android:layout_marginEnd="8dp"/>
-
-        <Button
-            android:id="@+id/btnCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Giỏ hàng" />
-    </LinearLayout>
-=======
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
-
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnNavProducts"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:text="Danh sách Sản Phẩm"
-        android:textSize="20sp"
-=======
-        android:text="Danh mục sản phẩm"
-        android:textSize="24sp"
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:text="Danh các danh mục"
+        android:layout_marginTop="16dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-<<<<<<< HEAD
-        android:id="@+id/rvProducts"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-=======
-        android:id="@+id/rvCategories"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
->>>>>>> 3ca8ad7785e38533e753f50dd77445108896c8e9
+    <Button
+        android:id="@+id/btnNavCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh mục Sản phẩm"
+        android:layout_marginTop="16dp"/>
+
 </LinearLayout>

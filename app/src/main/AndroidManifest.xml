@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Miniproject2">
         <activity
+            android:name=".ui.CategoryListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ProductListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CartActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.LoginActivity"
-            android:exported="false" />
+            android:exported="false" /> <!-- Sửa android:exported thành "true" vì đây là màn hình khởi động -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -29,6 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.CheckoutActivity"
+            android:exported="false" />
 
     </application>
 
