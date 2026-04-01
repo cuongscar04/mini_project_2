@@ -16,7 +16,7 @@
         android:id="@+id/btnNavProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Danh các danh mục"
+        android:text="Danh các sản phẩm"
         android:layout_marginTop="16dp"/>
 
 
@@ -24,7 +24,7 @@
         android:id="@+id/btnNavCategories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Danh mục Sản phẩm"
+        android:text="Danh mục danh mục"
         android:layout_marginTop="16dp"/>
 
 </LinearLayout>

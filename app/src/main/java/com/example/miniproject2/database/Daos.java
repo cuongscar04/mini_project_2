@@ -37,6 +37,10 @@ public class Daos {
 
         @Query("SELECT * FROM products WHERE id = :id LIMIT 1")
         Entities.Product getProductById(int id);
+
+        // Thêm hàm lấy sản phẩm theo danh mục
+        @Query("SELECT * FROM products WHERE categoryId = :categoryId")
+        List<Entities.Product> getProductsByCategoryId(int categoryId);
     }
 
     @Dao

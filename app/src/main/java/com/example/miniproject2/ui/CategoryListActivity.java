@@ -34,9 +34,13 @@ public class CategoryListActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categoryNames);
         listView.setAdapter(adapter);
 
+        // Xử lý khi bấm vào một danh mục: Chuyển sang màn hình ProductList và truyền theo categoryId
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedCategory = categories.get(position).name;
-            Toast.makeText(this, "Bạn đã chọn danh mục: " + selectedCategory, Toast.LENGTH_SHORT).show();
+            int selectedCategoryId = categories.get(position).id;
+
+            Intent intent = new Intent(CategoryListActivity.this, ProductListActivity.class);
+            intent.putExtra("CATEGORY_ID", selectedCategoryId);
+            startActivity(intent);
         });
     }
 }
